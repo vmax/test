@@ -1,0 +1,199 @@
+build:
+  quality:
+    job:
+      dependency-analysis:
+        machine: grabl-ubuntu-2004
+        type: foreground
+        script: |
+          echo "workflow quality: dependency-analysis"
+  correctness:
+    jobs:
+      build:
+        machine: grabl-ubuntu-2004
+        type: foreground
+        script: |
+          git clone https://github.com/graknlabs-test/grakn.git
+          cd grakn
+          bazel build //...
+      common:
+        machine: grabl-ubuntu-2004
+        type: foreground
+        script: |
+          git clone https://github.com/graknlabs-test/grakn.git
+          cd grakn
+          bazel test //common/... --test_output=errors          
+      server:
+        machine: grabl-ubuntu-2004
+        type: foreground
+        script: |
+          git clone https://github.com/graknlabs-test/grakn.git
+          cd grakn
+          bazel test //server/... --test_output=errors
+      graql:
+        machine: grabl-ubuntu-2004
+        type: foreground
+        script: |
+          git clone https://github.com/graknlabs-test/grakn.git
+          cd grakn
+          bazel test //graql/... --test_output=errors
+      behaviour-graql-define:
+        machine: grabl-ubuntu-2004
+        type: foreground
+        script: |
+          git clone https://github.com/graknlabs-test/grakn.git
+          cd grakn
+          bazel test //test/behaviour/graql/language/define:test --test_output=errors
+      behaviour-graql-delete:
+        machine: grabl-ubuntu-2004
+        type: foreground
+        script: |
+          git clone https://github.com/graknlabs-test/grakn.git
+          cd grakn
+          bazel test //test/behaviour/graql/language/delete:test --test_output=errors
+      behaviour-graql-get:
+        machine: grabl-ubuntu-2004
+        type: foreground
+        script: |
+          git clone https://github.com/graknlabs-test/grakn.git
+          cd grakn
+          bazel test //test/behaviour/graql/language/get:test --test_output=errors
+      behaviour-graql-insert:
+        machine: grabl-ubuntu-2004
+        type: foreground
+        script: |
+          git clone https://github.com/graknlabs-test/grakn.git
+          cd grakn
+          bazel test //test/behaviour/graql/language/insert:test --test_output=errors
+      behaviour-graql-match:
+        machine: grabl-ubuntu-2004
+        type: foreground
+        script: |
+          git clone https://github.com/graknlabs-test/grakn.git
+          cd grakn
+          bazel test //test/behaviour/graql/language/match:test --test_output=errors
+      behaviour-graql-undefine:
+        machine: grabl-ubuntu-2004
+        type: foreground
+        script: |
+          git clone https://github.com/graknlabs-test/grakn.git
+          cd grakn
+          bazel test //test/behaviour/graql/language/undefine:test --test_output=errors
+      behaviour-graql-explanation:
+        machine: grabl-ubuntu-2004
+        type: foreground
+        script: |
+          git clone https://github.com/graknlabs-test/grakn.git
+          cd grakn
+          bazel test //test/behaviour/graql/explanation/language:test --test_output=errors
+          bazel test //test/behaviour/graql/explanation/reasoner:test --test_output=errors
+      integration:
+        machine: grabl-ubuntu-2004
+        type: foreground
+        script: |
+          git clone https://github.com/graknlabs-test/grakn.git
+          cd grakn
+          bazel test //test/integration/server/... --test_output=errors
+          bazel test //test/integration/graql/executor/... --test_output=errors
+          bazel test //test/integration/graql/query/... --test_output=errors
+          bazel test //test/integration/graql/planning/... --test_output=errors
+      integration-concept:
+        machine: grabl-ubuntu-2004
+        type: foreground
+        script: |
+          git clone https://github.com/graknlabs-test/grakn.git
+          cd grakn
+          bazel test //test/integration/concept/... --test_output=errors
+      integration-keyspace:
+        machine: grabl-ubuntu-2004
+        type: foreground
+        script: |
+          git clone https://github.com/graknlabs-test/grakn.git
+          cd grakn
+          bazel test //test/integration/keyspace/... --test_output=errors
+      integration-reasoner:
+        machine: grabl-ubuntu-2004
+        type: foreground
+        script: |
+          git clone https://github.com/graknlabs-test/grakn.git
+          cd grakn
+          bazel test //test/integration/keyspace/... --test_output=errors
+      integration-analytics:
+        machine: grabl-ubuntu-2004
+        type: foreground
+        script: |
+          git clone https://github.com/graknlabs-test/grakn.git
+          cd grakn
+          bazel test //test/integration/keyspace/... --test_output=errors
+      assembly:
+        machine: grabl-ubuntu-2004
+        type: foreground
+        script: |
+          git clone https://github.com/graknlabs-test/grakn.git
+          cd grakn
+          bazel test //test/assembly:test-assembly --test_output=streamed --spawn_strategy=local
+      assembly-linux-targz:
+        machine: grabl-ubuntu-2004
+        type: foreground
+        script: |
+          git clone https://github.com/graknlabs-test/grakn.git
+          cd grakn
+          bazel build //:assemble-linux-targz
+          TEST_CACHE_TOKEN=$REPO_GITHUB_TOKEN bazel run @graknlabs_dependencies//tool/cache:cache -- --file $(pwd)/bazel-bin/grakn-core-all-linux.tar.gz --get
+          tar -xf bazel-bin/grakn-core-all-linux.tar.gz -C bazel-bin
+          nohup bazel-bin/grakn-core-all-linux/grakn server start
+          bazel test //test/common:grakn-application-test --test_output=streamed --spawn_strategy=local --cache_test_results=no
+          bazel-bin/grakn-core-all-linux/grakn server stop
+          TEST_CACHE_TOKEN=$REPO_GITHUB_TOKEN bazel run @graknlabs_dependencies//tool/cache:cache -- --file $(pwd)/bazel-bin/grakn-core-all-linux.tar.gz --save-success
+      assembly-docker:
+        machine: grabl-ubuntu-2004
+        type: foreground
+        script: |
+          git clone https://github.com/graknlabs-test/grakn.git
+          cd grakn
+          test/assembly/docker.py
+
+    execution:
+      - build
+      - common
+      - server
+      - graql
+      - behaviour-graql-define
+      - behaviour-graql-delete
+      - behaviour-graql-get
+      - behaviour-graql-insert
+      - behaviour-graql-match
+      - behaviour-graql-undefine
+      - behaviour-graql-explanation
+      - integration
+      - integration-concept
+      - integration-keyspace
+      - integration-reasoner
+      - integration-analytics
+      - assembly
+      - assembly-linux-targz
+      - assembly-docker
+
+
+release:
+  validation:
+    job:
+      validate-dependencies:
+        machine: grabl-ubuntu-2004
+        type: foreground
+        script: |
+          echo "workflow validation: validate-dependencies"
+  deployment:
+    job:
+      deploy-workbase:
+        machine: grabl-ubuntu-2004
+        type: foreground
+        script: |
+          echo "workflow deployment: deploy-workbase"
+  broadcast:
+    job:
+      broadcast-version:
+        machine: grabl-ubuntu-2004
+        type: foreground
+        script: |
+          echo "workflow bump: bump-version"
+
