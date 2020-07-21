@@ -6,6 +6,8 @@ build:
         type: foreground
         script: |
           echo "workflow quality: dependency-analysis"
+          git clone git@github.com:vmax/grabl.git
+          ls -la grabl/
   correctness:
     jobs:
       build:
