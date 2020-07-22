@@ -6,8 +6,6 @@ build:
         type: foreground
         script: |
           echo "workflow quality: dependency-analysis"
-          git clone git@github.com:vmax/grabl.git
-          ls -la grabl/
   correctness:
     jobs:
       build:
@@ -155,24 +153,6 @@ build:
           test/assembly/docker.py
 
     execution:
-      - build
-      - common
-      - server
-      - graql
-      - behaviour-graql-define
-      - behaviour-graql-delete
-      - behaviour-graql-get
-      - behaviour-graql-insert
-      - behaviour-graql-match
-      - behaviour-graql-undefine
-      - behaviour-graql-explanation
-      - integration
-      - integration-concept
-      - integration-keyspace
-      - integration-reasoner
-      - integration-analytics
-      - assembly
-      - assembly-linux-targz
       - assembly-docker
 
 
