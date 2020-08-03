@@ -14,7 +14,7 @@ build:
         script: |
           git clone https://github.com/graknlabs-test/grakn.git
           cd grakn
-          curl -OL https://raw.githubusercontent.com/graknlabs/dependencies/master/tool/bazelinstall/rbe.sh
+          curl -OL https://raw.githubusercontent.com/graknlabs/dependencies/pyenv-fixes/tool/bazelinstall/rbe.sh
           sudo mkdir -p /home/circleci/.credentials/ && sudo chmod a+w /home/circleci/.credentials/ && bash ./rbe.sh && rm ./rbe.sh
           bazel build --config=rbe //...
       common:
@@ -23,7 +23,7 @@ build:
         script: |
           git clone https://github.com/graknlabs-test/grakn.git
           cd grakn
-          curl -OL https://raw.githubusercontent.com/graknlabs/dependencies/master/tool/bazelinstall/rbe.sh
+          curl -OL https://raw.githubusercontent.com/graknlabs/dependencies/pyenv-fixes/tool/bazelinstall/rbe.sh
           sudo mkdir -p /home/circleci/.credentials/ && sudo chmod a+w /home/circleci/.credentials/ && bash ./rbe.sh && rm ./rbe.sh
           bazel test --config=rbe //common/... --test_output=errors
       server:
@@ -32,7 +32,7 @@ build:
         script: |
           git clone https://github.com/graknlabs-test/grakn.git
           cd grakn
-          curl -OL https://raw.githubusercontent.com/graknlabs/dependencies/master/tool/bazelinstall/rbe.sh
+          curl -OL https://raw.githubusercontent.com/graknlabs/dependencies/pyenv-fixes/tool/bazelinstall/rbe.sh
           sudo mkdir -p /home/circleci/.credentials/ && sudo chmod a+w /home/circleci/.credentials/ && bash ./rbe.sh && rm ./rbe.sh
           bazel test --config=rbe //server/... --test_output=errors
       graql:
@@ -41,7 +41,7 @@ build:
         script: |
           git clone https://github.com/graknlabs-test/grakn.git
           cd grakn
-          curl -OL https://raw.githubusercontent.com/graknlabs/dependencies/master/tool/bazelinstall/rbe.sh
+          curl -OL https://raw.githubusercontent.com/graknlabs/dependencies/pyenv-fixes/tool/bazelinstall/rbe.sh
           sudo mkdir -p /home/circleci/.credentials/ && sudo chmod a+w /home/circleci/.credentials/ && bash ./rbe.sh && rm ./rbe.sh
           bazel test --config=rbe //graql/... --test_output=errors
       behaviour:
@@ -51,7 +51,7 @@ build:
         script: |
           git clone https://github.com/graknlabs-test/grakn.git
           cd grakn
-          curl -OL https://raw.githubusercontent.com/graknlabs/dependencies/master/tool/bazelinstall/rbe.sh
+          curl -OL https://raw.githubusercontent.com/graknlabs/dependencies/pyenv-fixes/tool/bazelinstall/rbe.sh
           sudo mkdir -p /home/circleci/.credentials/ && sudo chmod a+w /home/circleci/.credentials/ && bash ./rbe.sh && rm ./rbe.sh
           bazel test --config=rbe //test/behaviour/... --test_output=errors
       integration:
@@ -61,7 +61,7 @@ build:
         script: |
           git clone https://github.com/graknlabs-test/grakn.git
           cd grakn
-          curl -OL https://raw.githubusercontent.com/graknlabs/dependencies/master/tool/bazelinstall/rbe.sh
+          curl -OL https://raw.githubusercontent.com/graknlabs/dependencies/pyenv-fixes/tool/bazelinstall/rbe.sh
           sudo mkdir -p /home/circleci/.credentials/ && sudo chmod a+w /home/circleci/.credentials/ && bash ./rbe.sh && rm ./rbe.sh
           bazel test --config=rbe //test/integration/... --test_output=errors
       assembly:
@@ -70,7 +70,7 @@ build:
         script: |
           git clone https://github.com/graknlabs-test/grakn.git
           cd grakn
-          curl -OL https://raw.githubusercontent.com/graknlabs/dependencies/master/tool/bazelinstall/rbe.sh
+          curl -OL https://raw.githubusercontent.com/graknlabs/dependencies/pyenv-fixes/tool/bazelinstall/rbe.sh
           sudo mkdir -p /home/circleci/.credentials/ && sudo chmod a+w /home/circleci/.credentials/ && bash ./rbe.sh && rm ./rbe.sh
           bazel test --config=rbe //test/assembly:test-assembly --test_output=streamed --spawn_strategy=local
       assembly-linux-targz:
@@ -79,7 +79,7 @@ build:
         script: |
           git clone https://github.com/graknlabs-test/grakn.git
           cd grakn
-          curl -OL https://raw.githubusercontent.com/graknlabs/dependencies/master/tool/bazelinstall/rbe.sh
+          curl -OL https://raw.githubusercontent.com/graknlabs/dependencies/pyenv-fixes/tool/bazelinstall/rbe.sh
           sudo mkdir -p /home/circleci/.credentials/ && sudo chmod a+w /home/circleci/.credentials/ && bash ./rbe.sh && rm ./rbe.sh
           bazel build --config=rbe //:assemble-linux-targz
           # TEST_CACHE_TOKEN=$REPO_GITHUB_TOKEN bazel run @graknlabs_dependencies//tool/cache:cache -- --file $(pwd)/bazel-bin/grakn-core-all-linux.tar.gz --get
