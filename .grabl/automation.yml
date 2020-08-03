@@ -253,13 +253,13 @@ build:
             --api-token $GRABL_TOKEN \
             --config-file /home/grabl/simulation/config.yml
 
-    execution:
-      - run-grakn
-      - test-performance-big-grakn:
-         depends: [run-grakn]
-      - run-neo4j
-      - test-performance-big-neo4j:
-         depends: [run-neo4j]
+    execution: []
+    #  - run-grakn
+    #  - test-performance-big-grakn:
+    #     depends: [run-grakn]
+    #  - run-neo4j
+    #  - test-performance-big-neo4j:
+    #     depends: [run-neo4j]
 
 
 release:
