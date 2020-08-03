@@ -120,7 +120,7 @@ jobs:
 
 
   # behaviour tests
-  test-behaviour-connection:
+  test-behaviour:
     machine:
       image: ubuntu-1604:201903-01
     working_directory: ~/grakn
@@ -128,143 +128,7 @@ jobs:
       - install-bazel-linux
       - checkout
       - run-bazel:
-          command: bazel test //test/behaviour/connection/keyspace:test --test_output=errors
-      - run-bazel:
-          command: bazel test //test/behaviour/connection/session:test --test_output=errors
-      - run-bazel:
-          command: bazel test //test/behaviour/connection/transaction:test --test_output=errors
-
-  test-behaviour-graql-define:
-    machine:
-      image: ubuntu-1604:201903-01
-    working_directory: ~/grakn
-    steps:
-      - install-bazel-linux
-      - checkout
-      - run-bazel:
-          command: bazel test //test/behaviour/graql/language/define:test --test_output=errors
-
-  test-behaviour-graql-delete:
-    machine:
-      image: ubuntu-1604:201903-01
-    working_directory: ~/grakn
-    steps:
-      - install-bazel-linux
-      - checkout
-      - run-bazel:
-          command: bazel test //test/behaviour/graql/language/delete:test --test_output=errors
-
-  test-behaviour-graql-get:
-    machine:
-      image: ubuntu-1604:201903-01
-    working_directory: ~/grakn
-    steps:
-      - install-bazel-linux
-      - checkout
-      - run-bazel:
-          command: bazel test //test/behaviour/graql/language/get:test --test_output=errors
-
-  test-behaviour-graql-insert:
-    machine:
-      image: ubuntu-1604:201903-01
-    working_directory: ~/grakn
-    steps:
-      - install-bazel-linux
-      - checkout
-      - run-bazel:
-          command: bazel test //test/behaviour/graql/language/insert:test --test_output=errors
-
-  test-behaviour-graql-match:
-    machine:
-      image: ubuntu-1604:201903-01
-    working_directory: ~/grakn
-    steps:
-      - install-bazel-linux
-      - checkout
-      - run-bazel:
-          command: bazel test //test/behaviour/graql/language/match:test --test_output=errors
-
-  test-behaviour-graql-undefine:
-    machine:
-      image: ubuntu-1604:201903-01
-    working_directory: ~/grakn
-    steps:
-      - install-bazel-linux
-      - checkout
-      - run-bazel:
-          command: bazel test //test/behaviour/graql/language/undefine:test --test_output=errors
-
-  test-behaviour-graql-explanation:
-    machine:
-      image: ubuntu-1604:201903-01
-    working_directory: ~/grakn
-    steps:
-      - install-bazel-linux
-      - checkout
-      - run-bazel:
-          command: bazel test //test/behaviour/graql/explanation/language:test --test_output=errors
-      - run-bazel:
-          command: bazel test //test/behaviour/graql/explanation/reasoner:test --test_output=errors
-
-  test-behaviour-resolution-test-framework:
-    machine:
-      image: ubuntu-1604:201903-01
-    working_directory: ~/grakn
-    steps:
-      - install-bazel-linux
-      - checkout
-      - run-bazel:
-          command: bazel test //test/behaviour/resolution/reasoner/test_framework:test --test_output=errors
-
-  test-behaviour-resolution-attribute-attachment:
-    machine:
-      image: ubuntu-1604:201903-01
-    working_directory: ~/grakn
-    steps:
-      - install-bazel-linux
-      - checkout
-      - run-bazel:
-          command: bazel test //test/behaviour/resolution/reasoner/attribute_attachment:test --test_output=errors
-
-  test-behaviour-resolution-value-predicate:
-    machine:
-      image: ubuntu-1604:201903-01
-    working_directory: ~/grakn
-    steps:
-      - install-bazel-linux
-      - checkout
-      - run-bazel:
-          command: bazel test //test/behaviour/resolution/reasoner/value_predicate:test --test_output=errors
-
-  test-behaviour-resolution-type-generation:
-    machine:
-      image: ubuntu-1604:201903-01
-    working_directory: ~/grakn
-    steps:
-      - install-bazel-linux
-      - checkout
-      - run-bazel:
-          command: bazel test //test/behaviour/resolution/reasoner/type_generation:test --test_output=errors
-
-  test-behaviour-resolution-type-hierarchy:
-    machine:
-      image: ubuntu-1604:201903-01
-    working_directory: ~/grakn
-    steps:
-      - install-bazel-linux
-      - checkout
-      - run-bazel:
-          command: bazel test //test/behaviour/resolution/reasoner/type_hierarchy:test --test_output=errors
-
-  test-resolution-framework:
-    machine:
-      image: ubuntu-1604:201903-01
-    working_directory: ~/grakn
-    steps:
-      - install-bazel-linux
-      - checkout
-      - run-bazel:
-          command: bazel test //test/behaviour/resolution/framework/... --test_output=errors
+          command: bazel test //test/behaviour/... --test_output=errors
 
   # integration tests
   test-integration:
@@ -275,53 +139,7 @@ jobs:
       - install-bazel-linux
       - checkout
       - run-bazel:
-          command: bazel test //test/integration/server/... --test_output=errors
-      - run-bazel:
-          command: bazel test //test/integration/graql/executor/... --test_output=errors
-      - run-bazel:
-          command: bazel test //test/integration/graql/query/... --test_output=errors
-      - run-bazel:
-          command: bazel test //test/integration/graql/planning/... --test_output=errors
-
-  test-integration-concept:
-    machine:
-      image: ubuntu-1604:201903-01
-    working_directory: ~/grakn
-    steps:
-      - install-bazel-linux
-      - checkout
-      - run-bazel:
-          command: bazel test //test/integration/concept/... --test_output=errors
-
-  test-integration-keyspace:
-    machine:
-      image: ubuntu-1604:201903-01
-    working_directory: ~/grakn
-    steps:
-      - install-bazel-linux
-      - checkout
-      - run-bazel:
-          command: bazel test //test/integration/keyspace/... --test_output=errors
-
-  test-integration-reasoner:
-    machine:
-      image: ubuntu-1604:201903-01
-    working_directory: ~/grakn
-    steps:
-      - install-bazel-linux
-      - checkout
-      - run-bazel:
-          command: bazel test //test/integration/graql/reasoner/... --test_output=errors
-
-  test-integration-analytics:
-    machine:
-      image: ubuntu-1604:201903-01
-    working_directory: ~/grakn
-    steps:
-      - install-bazel-linux
-      - checkout
-      - run-bazel:
-          command: bazel test //test/integration/graql/analytics/... --test_output=errors
+          command: bazel test //test/integration/... --test_output=errors
 
   # assembly tests
   test-assembly:
@@ -670,79 +488,11 @@ workflows:
           filters:
             branches:
               ignore: grakn-release-branch
-      - test-behaviour-connection:
-          filters:
-            branches:
-              ignore: grakn-release-branch
-      - test-behaviour-graql-define:
-          filters:
-            branches:
-              ignore: grakn-release-branch
-      - test-behaviour-graql-delete:
-          filters:
-            branches:
-              ignore: grakn-release-branch
-      - test-behaviour-graql-get:
-          filters:
-            branches:
-              ignore: grakn-release-branch
-      - test-behaviour-graql-insert:
-          filters:
-            branches:
-              ignore: grakn-release-branch
-      - test-behaviour-graql-match:
-          filters:
-            branches:
-              ignore: grakn-release-branch
-      - test-behaviour-graql-undefine:
-          filters:
-            branches:
-              ignore: grakn-release-branch
-      - test-behaviour-graql-explanation:
-          filters:
-            branches:
-              ignore: grakn-release-branch
-      - test-behaviour-resolution-test-framework:
-          filters:
-            branches:
-              ignore: grakn-release-branch
-      - test-behaviour-resolution-attribute-attachment:
-          filters:
-            branches:
-              ignore: grakn-release-branch
-      - test-behaviour-resolution-value-predicate:
-          filters:
-            branches:
-              ignore: grakn-release-branch
-      - test-behaviour-resolution-type-generation:
-          filters:
-            branches:
-              ignore: grakn-release-branch
-      - test-behaviour-resolution-type-hierarchy:
-          filters:
-            branches:
-              ignore: grakn-release-branch
-      - test-resolution-framework:
+      - test-behaviour:
           filters:
             branches:
               ignore: grakn-release-branch
       - test-integration:
-          filters:
-            branches:
-              ignore: grakn-release-branch
-      - test-integration-concept:
-          filters:
-            branches:
-              ignore: grakn-release-branch
-      - test-integration-keyspace:
-          filters:
-            branches:
-              ignore: grakn-release-branch
-      - test-integration-reasoner:
-          filters:
-            branches:
-              ignore: grakn-release-branch
-      - test-integration-analytics:
           filters:
             branches:
               ignore: grakn-release-branch
@@ -759,25 +509,8 @@ workflows:
             - test-common
             - test-server
             - test-graql
-            - test-behaviour-connection
-            - test-behaviour-graql-define
-            - test-behaviour-graql-delete
-            - test-behaviour-graql-get
-            - test-behaviour-graql-insert
-            - test-behaviour-graql-match
-            - test-behaviour-graql-undefine
-            - test-behaviour-graql-explanation
-            - test-behaviour-resolution-test-framework
-            - test-behaviour-resolution-attribute-attachment
-            - test-behaviour-resolution-value-predicate
-            - test-behaviour-resolution-type-generation
-            - test-behaviour-resolution-type-hierarchy
-            - test-resolution-framework
+            - test-behaviour
             - test-integration
-            - test-integration-reasoner
-            - test-integration-analytics
-            - test-integration-concept
-            - test-integration-keyspace
       - test-assembly-mac-zip:
           filters:
             branches:
@@ -791,25 +524,8 @@ workflows:
             - test-common
             - test-server
             - test-graql
-            - test-behaviour-connection
-            - test-behaviour-graql-define
-            - test-behaviour-graql-delete
-            - test-behaviour-graql-get
-            - test-behaviour-graql-insert
-            - test-behaviour-graql-match
-            - test-behaviour-graql-undefine
-            - test-behaviour-graql-explanation
-            - test-behaviour-resolution-test-framework
-            - test-behaviour-resolution-attribute-attachment
-            - test-behaviour-resolution-value-predicate
-            - test-behaviour-resolution-type-generation
-            - test-behaviour-resolution-type-hierarchy
-            - test-resolution-framework
+            - test-behaviour
             - test-integration
-            - test-integration-reasoner
-            - test-integration-analytics
-            - test-integration-concept
-            - test-integration-keyspace
       - test-assembly-windows-zip:
           filters:
             branches:
@@ -823,25 +539,8 @@ workflows:
             - test-common
             - test-server
             - test-graql
-            - test-behaviour-connection
-            - test-behaviour-graql-define
-            - test-behaviour-graql-delete
-            - test-behaviour-graql-get
-            - test-behaviour-graql-insert
-            - test-behaviour-graql-match
-            - test-behaviour-graql-undefine
-            - test-behaviour-graql-explanation
-            - test-behaviour-resolution-test-framework
-            - test-behaviour-resolution-attribute-attachment
-            - test-behaviour-resolution-value-predicate
-            - test-behaviour-resolution-type-generation
-            - test-behaviour-resolution-type-hierarchy
-            - test-resolution-framework
+            - test-behaviour
             - test-integration
-            - test-integration-reasoner
-            - test-integration-analytics
-            - test-integration-concept
-            - test-integration-keyspace
       - test-assembly-linux-targz:
           filters:
             branches:
@@ -855,25 +554,8 @@ workflows:
             - test-common
             - test-server
             - test-graql
-            - test-behaviour-connection
-            - test-behaviour-graql-define
-            - test-behaviour-graql-delete
-            - test-behaviour-graql-get
-            - test-behaviour-graql-insert
-            - test-behaviour-graql-match
-            - test-behaviour-graql-undefine
-            - test-behaviour-graql-explanation
-            - test-behaviour-resolution-test-framework
-            - test-behaviour-resolution-attribute-attachment
-            - test-behaviour-resolution-value-predicate
-            - test-behaviour-resolution-type-generation
-            - test-behaviour-resolution-type-hierarchy
-            - test-resolution-framework
+            - test-behaviour
             - test-integration
-            - test-integration-reasoner
-            - test-integration-analytics
-            - test-integration-concept
-            - test-integration-keyspace
       - test-assembly-docker:
           filters:
             branches:
@@ -887,23 +569,8 @@ workflows:
             - test-common
             - test-server
             - test-graql
-            - test-behaviour-connection
-            - test-behaviour-graql-define
-            - test-behaviour-graql-delete
-            - test-behaviour-graql-get
-            - test-behaviour-graql-insert
-            - test-behaviour-graql-match
-            - test-behaviour-graql-undefine
-            - test-behaviour-graql-explanation
-            - test-behaviour-resolution-test-framework
-            - test-behaviour-resolution-attribute-attachment
-            - test-behaviour-resolution-value-predicate
-            - test-resolution-framework
+            - test-behaviour
             - test-integration
-            - test-integration-reasoner
-            - test-integration-analytics
-            - test-integration-concept
-            - test-integration-keyspace
       - deploy-artifact-snapshot:
           filters:
             branches:
