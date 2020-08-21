@@ -5,6 +5,7 @@ build:
         machine: graknlabs-ubuntu-20.04
         type: foreground
         script: |
+          sleep 5m
           bazel build --config=rbe --announce_rc //...
     execution:
       - build
