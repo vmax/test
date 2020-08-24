@@ -5,8 +5,7 @@ build:
         machine: graknlabs-ubuntu-20.04
         type: foreground
         script: |
-          sleep 5m
-          bazel build --config=rbe --announce_rc //...
+          git clone git@github.com:graknlabs-test/cluster.git
     execution:
       - build
 
