@@ -1,12 +1,9 @@
 build:
   correctness:
-    jobs:
-      build:
-        machine: graknlabs-ubuntu-20.04
-        type: foreground
-        script: |
-          sleep 10m
-          git clone git@github.com:graknlabs-test/cluster.git
-    execution:
-      - build
+    build:
+      machine: graknlabs-ubuntu-20.04
+      type: foreground
+      script: |
+        sleep 10m
+        git clone git@github.com:graknlabs-test/cluster.git
 
