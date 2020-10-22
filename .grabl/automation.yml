@@ -3,7 +3,7 @@ config:
   dependencies:
     graql: [snapshot, release]
     protocol: [snapshot, release]
-    client-java: release
+    client-java: [release]
 
 build:
   correctness:
