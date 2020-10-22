@@ -1,3 +1,10 @@
+config:
+  version-candidate: ./VERSION
+  dependencies:
+    - graql: [snapshot, release]
+    - protocol: [snapshot, release]
+    - client-java: release
+
 build:
   correctness:
     build:
