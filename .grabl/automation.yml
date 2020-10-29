@@ -1,5 +1,5 @@
 config:
-  version-candidate: ./VERSION
+  version-candidate: VERSION
   dependencies:
     common: [snapshot]
 
